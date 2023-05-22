@@ -25,5 +25,14 @@ module.exports = {
     project: './tsconfig.json'
   },
   plugins: ['vue'],
-  rules: {}
+  rules: {},
+  ignorePatterns: [
+    'node_modules',
+    'dist',
+    'public',
+    'env.d.ts',
+    '.eslintrc.js',
+    'vite.config.ts',
+    'lint-staged.config.mjs'
+  ]
 }
