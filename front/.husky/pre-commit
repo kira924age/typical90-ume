@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd typical90-ume-frontend
+npx --no lint-staged --concurrent false
