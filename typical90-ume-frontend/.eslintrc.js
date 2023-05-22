@@ -5,7 +5,14 @@ module.exports = {
     node: true,
     'vue/setup-compiler-macros': true
   },
-  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'standard-with-typescript'],
+  extends: [
+    'eslint:recommended',
+    'plugin:vue/vue3-recommended',
+    'standard-with-typescript',
+    '@vue/eslint-config-typescript',
+    '@vue/eslint-config-prettier/skip-formatting',
+    'plugin:unicorn/recommended'
+  ],
   overrides: [],
   // Vueを読み込めるようにする。eslint-plugin-vueが提供してくれている。
   parser: 'vue-eslint-parser',
