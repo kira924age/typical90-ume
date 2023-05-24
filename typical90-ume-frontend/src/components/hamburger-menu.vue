@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import { VMenu, VList, VListItem, VListItemTitle } from 'vuetify/components'
 import { useRouter } from 'vue-router'
 
 type Properties = {
