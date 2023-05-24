@@ -33,6 +33,8 @@ module.exports = {
     'env.d.ts',
     '.eslintrc.js',
     'vite.config.ts',
-    'lint-staged.config.mjs'
+    'lint-staged.config.mjs',
+    'postcss.config.js',
+    'tailwind.config.js',
   ]
 }
