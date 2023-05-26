@@ -1,0 +1,722 @@
+[
+  {
+    "id": "typical90_a",
+    "contest_id": "typical90",
+    "problem_index": "001",
+    "name": "Yokan Party\uff08\u26054\uff09",
+    "title": "001. Yokan Party\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_b",
+    "contest_id": "typical90",
+    "problem_index": "002",
+    "name": "Encyclopedia of Parentheses\uff08\u26053\uff09",
+    "title": "002. Encyclopedia of Parentheses\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_c",
+    "contest_id": "typical90",
+    "problem_index": "003",
+    "name": "Longest Circular Road\uff08\u26054\uff09",
+    "title": "003. Longest Circular Road\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_d",
+    "contest_id": "typical90",
+    "problem_index": "004",
+    "name": "Cross Sum\uff08\u26052\uff09",
+    "title": "004. Cross Sum\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_e",
+    "contest_id": "typical90",
+    "problem_index": "005",
+    "name": "Restricted Digits\uff08\u26057\uff09",
+    "title": "005. Restricted Digits\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_f",
+    "contest_id": "typical90",
+    "problem_index": "006",
+    "name": "Smallest Subsequence\uff08\u26055\uff09",
+    "title": "006. Smallest Subsequence\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_g",
+    "contest_id": "typical90",
+    "problem_index": "007",
+    "name": "CP Classes\uff08\u26053\uff09",
+    "title": "007. CP Classes\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_h",
+    "contest_id": "typical90",
+    "problem_index": "008",
+    "name": "AtCounter\uff08\u26054\uff09",
+    "title": "008. AtCounter\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_i",
+    "contest_id": "typical90",
+    "problem_index": "009",
+    "name": "Three Point Angle\uff08\u26056\uff09",
+    "title": "009. Three Point Angle\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_j",
+    "contest_id": "typical90",
+    "problem_index": "010",
+    "name": "Score Sum Queries\uff08\u26052\uff09",
+    "title": "010. Score Sum Queries\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_k",
+    "contest_id": "typical90",
+    "problem_index": "011",
+    "name": "Gravy Jobs\uff08\u26056\uff09",
+    "title": "011. Gravy Jobs\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_l",
+    "contest_id": "typical90",
+    "problem_index": "012",
+    "name": "Red Painting\uff08\u26054\uff09",
+    "title": "012. Red Painting\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_m",
+    "contest_id": "typical90",
+    "problem_index": "013",
+    "name": "Passing\uff08\u26055\uff09",
+    "title": "013. Passing\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_n",
+    "contest_id": "typical90",
+    "problem_index": "014",
+    "name": "We Used to Sing a Song Together\uff08\u26053\uff09",
+    "title": "014. We Used to Sing a Song Together\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_o",
+    "contest_id": "typical90",
+    "problem_index": "015",
+    "name": "Don't be too close\uff08\u26056\uff09",
+    "title": "015. Don't be too close\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_p",
+    "contest_id": "typical90",
+    "problem_index": "016",
+    "name": "Minimum Coins\uff08\u26053\uff09",
+    "title": "016. Minimum Coins\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_q",
+    "contest_id": "typical90",
+    "problem_index": "017",
+    "name": "Crossing Segments\uff08\u26057\uff09",
+    "title": "017. Crossing Segments\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_r",
+    "contest_id": "typical90",
+    "problem_index": "018",
+    "name": "Statue of Chokudai\uff08\u26053\uff09",
+    "title": "018. Statue of Chokudai\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_s",
+    "contest_id": "typical90",
+    "problem_index": "019",
+    "name": "Pick Two\uff08\u26056\uff09",
+    "title": "019. Pick Two\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_t",
+    "contest_id": "typical90",
+    "problem_index": "020",
+    "name": "Log Inequality\uff08\u26053\uff09",
+    "title": "020. Log Inequality\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_u",
+    "contest_id": "typical90",
+    "problem_index": "021",
+    "name": "Come Back in One Piece\uff08\u26055\uff09",
+    "title": "021. Come Back in One Piece\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_v",
+    "contest_id": "typical90",
+    "problem_index": "022",
+    "name": "Cubic Cake\uff08\u26052\uff09",
+    "title": "022. Cubic Cake\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_w",
+    "contest_id": "typical90",
+    "problem_index": "023",
+    "name": "Avoid War\uff08\u26057\uff09",
+    "title": "023. Avoid War\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_x",
+    "contest_id": "typical90",
+    "problem_index": "024",
+    "name": "Select +\uff0f- One\uff08\u26052\uff09",
+    "title": "024. Select +\uff0f- One\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_y",
+    "contest_id": "typical90",
+    "problem_index": "025",
+    "name": "Digit Product Equation\uff08\u26057\uff09",
+    "title": "025. Digit Product Equation\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_z",
+    "contest_id": "typical90",
+    "problem_index": "026",
+    "name": "Independent Set on a Tree\uff08\u26054\uff09",
+    "title": "026. Independent Set on a Tree\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_aa",
+    "contest_id": "typical90",
+    "problem_index": "027",
+    "name": "Sign Up Requests \uff08\u26052\uff09",
+    "title": "027. Sign Up Requests \uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_ab",
+    "contest_id": "typical90",
+    "problem_index": "028",
+    "name": "Cluttered Paper\uff08\u26054\uff09",
+    "title": "028. Cluttered Paper\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_ac",
+    "contest_id": "typical90",
+    "problem_index": "029",
+    "name": "Long Bricks\uff08\u26055\uff09",
+    "title": "029. Long Bricks\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_ad",
+    "contest_id": "typical90",
+    "problem_index": "030",
+    "name": "K Factors\uff08\u26055\uff09",
+    "title": "030. K Factors\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_ae",
+    "contest_id": "typical90",
+    "problem_index": "031",
+    "name": "VS AtCoder\uff08\u26056\uff09",
+    "title": "031. VS AtCoder\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_af",
+    "contest_id": "typical90",
+    "problem_index": "032",
+    "name": "AtCoder Ekiden\uff08\u26053\uff09",
+    "title": "032. AtCoder Ekiden\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_ag",
+    "contest_id": "typical90",
+    "problem_index": "033",
+    "name": "Not Too Bright\uff08\u26052\uff09",
+    "title": "033. Not Too Bright\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_ah",
+    "contest_id": "typical90",
+    "problem_index": "034",
+    "name": "There are few types of elements\uff08\u26054\uff09",
+    "title": "034. There are few types of elements\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_ai",
+    "contest_id": "typical90",
+    "problem_index": "035",
+    "name": "Preserve Connectivity\uff08\u26057\uff09",
+    "title": "035. Preserve Connectivity\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_aj",
+    "contest_id": "typical90",
+    "problem_index": "036",
+    "name": "Max Manhattan Distance\uff08\u26055\uff09",
+    "title": "036. Max Manhattan Distance\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_ak",
+    "contest_id": "typical90",
+    "problem_index": "037",
+    "name": "Don't Leave the Spice\uff08\u26055\uff09",
+    "title": "037. Don't Leave the Spice\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_al",
+    "contest_id": "typical90",
+    "problem_index": "038",
+    "name": "Large LCM\uff08\u26053\uff09",
+    "title": "038. Large LCM\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_am",
+    "contest_id": "typical90",
+    "problem_index": "039",
+    "name": "Tree Distance\uff08\u26055\uff09",
+    "title": "039. Tree Distance\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_an",
+    "contest_id": "typical90",
+    "problem_index": "040",
+    "name": "Get More Money\uff08\u26057\uff09",
+    "title": "040. Get More Money\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_ao",
+    "contest_id": "typical90",
+    "problem_index": "041",
+    "name": "Piles in AtCoder Farm\uff08\u26057\uff09",
+    "title": "041. Piles in AtCoder Farm\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_ap",
+    "contest_id": "typical90",
+    "problem_index": "042",
+    "name": "Multiple of 9\uff08\u26054\uff09",
+    "title": "042. Multiple of 9\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_aq",
+    "contest_id": "typical90",
+    "problem_index": "043",
+    "name": "Maze Challenge with Lack of Sleep\uff08\u26054\uff09",
+    "title": "043. Maze Challenge with Lack of Sleep\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_ar",
+    "contest_id": "typical90",
+    "problem_index": "044",
+    "name": "Shift and Swapping\uff08\u26053\uff09",
+    "title": "044. Shift and Swapping\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_as",
+    "contest_id": "typical90",
+    "problem_index": "045",
+    "name": "Simple Grouping\uff08\u26056\uff09",
+    "title": "045. Simple Grouping\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_at",
+    "contest_id": "typical90",
+    "problem_index": "046",
+    "name": "I Love 46\uff08\u26053\uff09",
+    "title": "046. I Love 46\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_au",
+    "contest_id": "typical90",
+    "problem_index": "047",
+    "name": "Monochromatic Diagonal\uff08\u26057\uff09",
+    "title": "047. Monochromatic Diagonal\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_av",
+    "contest_id": "typical90",
+    "problem_index": "048",
+    "name": "I will not drop out\uff08\u26053\uff09",
+    "title": "048. I will not drop out\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_aw",
+    "contest_id": "typical90",
+    "problem_index": "049",
+    "name": "Flip Digits 2\uff08\u26056\uff09",
+    "title": "049. Flip Digits 2\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_ax",
+    "contest_id": "typical90",
+    "problem_index": "050",
+    "name": "Stair Jump\uff08\u26053\uff09",
+    "title": "050. Stair Jump\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_ay",
+    "contest_id": "typical90",
+    "problem_index": "051",
+    "name": "Typical Shop\uff08\u26055\uff09",
+    "title": "051. Typical Shop\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_az",
+    "contest_id": "typical90",
+    "problem_index": "052",
+    "name": "Dice Product\uff08\u26053\uff09",
+    "title": "052. Dice Product\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_ba",
+    "contest_id": "typical90",
+    "problem_index": "053",
+    "name": "Discrete Dowsing\uff08\u26057\uff09",
+    "title": "053. Discrete Dowsing\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_bb",
+    "contest_id": "typical90",
+    "problem_index": "054",
+    "name": "Takahashi Number\uff08\u26056\uff09",
+    "title": "054. Takahashi Number\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_bc",
+    "contest_id": "typical90",
+    "problem_index": "055",
+    "name": "Select 5\uff08\u26052\uff09",
+    "title": "055. Select 5\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_bd",
+    "contest_id": "typical90",
+    "problem_index": "056",
+    "name": "Lucky Bag\uff08\u26055\uff09",
+    "title": "056. Lucky Bag\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_be",
+    "contest_id": "typical90",
+    "problem_index": "057",
+    "name": "Flip Flap\uff08\u26056\uff09",
+    "title": "057. Flip Flap\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_bf",
+    "contest_id": "typical90",
+    "problem_index": "058",
+    "name": "Original Calculator\uff08\u26054\uff09",
+    "title": "058. Original Calculator\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_bg",
+    "contest_id": "typical90",
+    "problem_index": "059",
+    "name": "Many Graph Queries\uff08\u26057\uff09",
+    "title": "059. Many Graph Queries\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_bh",
+    "contest_id": "typical90",
+    "problem_index": "060",
+    "name": "Chimera\uff08\u26055\uff09",
+    "title": "060. Chimera\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_bi",
+    "contest_id": "typical90",
+    "problem_index": "061",
+    "name": "Deck\uff08\u26052\uff09",
+    "title": "061. Deck\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_bj",
+    "contest_id": "typical90",
+    "problem_index": "062",
+    "name": "Paint All\uff08\u26056\uff09",
+    "title": "062. Paint All\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_bk",
+    "contest_id": "typical90",
+    "problem_index": "063",
+    "name": "Monochromatic Subgrid\uff08\u26054\uff09",
+    "title": "063. Monochromatic Subgrid\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_bl",
+    "contest_id": "typical90",
+    "problem_index": "064",
+    "name": "Uplift\uff08\u26053\uff09",
+    "title": "064. Uplift\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_bm",
+    "contest_id": "typical90",
+    "problem_index": "065",
+    "name": "RGB Balls 2\uff08\u26057\uff09",
+    "title": "065. RGB Balls 2\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_bn",
+    "contest_id": "typical90",
+    "problem_index": "066",
+    "name": "Various Arrays\uff08\u26055\uff09",
+    "title": "066. Various Arrays\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_bo",
+    "contest_id": "typical90",
+    "problem_index": "067",
+    "name": "Base 8 to 9\uff08\u26052\uff09",
+    "title": "067. Base 8 to 9\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_bp",
+    "contest_id": "typical90",
+    "problem_index": "068",
+    "name": "Paired Information\uff08\u26055\uff09",
+    "title": "068. Paired Information\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_bq",
+    "contest_id": "typical90",
+    "problem_index": "069",
+    "name": "Colorful Blocks 2\uff08\u26053\uff09",
+    "title": "069. Colorful Blocks 2\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_br",
+    "contest_id": "typical90",
+    "problem_index": "070",
+    "name": "Plant Planning\uff08\u26054\uff09",
+    "title": "070. Plant Planning\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_bs",
+    "contest_id": "typical90",
+    "problem_index": "071",
+    "name": "Fuzzy Priority\uff08\u26057\uff09",
+    "title": "071. Fuzzy Priority\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_bt",
+    "contest_id": "typical90",
+    "problem_index": "072",
+    "name": "Loop Railway Plan\uff08\u26054\uff09",
+    "title": "072. Loop Railway Plan\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_bu",
+    "contest_id": "typical90",
+    "problem_index": "073",
+    "name": "We Need Both a and b\uff08\u26055\uff09",
+    "title": "073. We Need Both a and b\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_bv",
+    "contest_id": "typical90",
+    "problem_index": "074",
+    "name": "ABC String 2\uff08\u26056\uff09",
+    "title": "074. ABC String 2\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_bw",
+    "contest_id": "typical90",
+    "problem_index": "075",
+    "name": "Magic For Balls\uff08\u26053\uff09",
+    "title": "075. Magic For Balls\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_bx",
+    "contest_id": "typical90",
+    "problem_index": "076",
+    "name": "Cake Cut\uff08\u26053\uff09",
+    "title": "076. Cake Cut\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_by",
+    "contest_id": "typical90",
+    "problem_index": "077",
+    "name": "Planes on a 2D Plane\uff08\u26057\uff09",
+    "title": "077. Planes on a 2D Plane\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_bz",
+    "contest_id": "typical90",
+    "problem_index": "078",
+    "name": "Easy Graph Problem\uff08\u26052\uff09",
+    "title": "078. Easy Graph Problem\uff08\u26052\uff09",
+    "star": "2"
+  },
+  {
+    "id": "typical90_ca",
+    "contest_id": "typical90",
+    "problem_index": "079",
+    "name": "Two by Two\uff08\u26053\uff09",
+    "title": "079. Two by Two\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_cb",
+    "contest_id": "typical90",
+    "problem_index": "080",
+    "name": "Let's Share Bit\uff08\u26056\uff09",
+    "title": "080. Let's Share Bit\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_cc",
+    "contest_id": "typical90",
+    "problem_index": "081",
+    "name": "Friendly Group\uff08\u26055\uff09",
+    "title": "081. Friendly Group\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_cd",
+    "contest_id": "typical90",
+    "problem_index": "082",
+    "name": "Counting Numbers\uff08\u26053\uff09",
+    "title": "082. Counting Numbers\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_ce",
+    "contest_id": "typical90",
+    "problem_index": "083",
+    "name": "Colorful Graph\uff08\u26056\uff09",
+    "title": "083. Colorful Graph\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_cf",
+    "contest_id": "typical90",
+    "problem_index": "084",
+    "name": "There are two types of characters\uff08\u26053\uff09",
+    "title": "084. There are two types of characters\uff08\u26053\uff09",
+    "star": "3"
+  },
+  {
+    "id": "typical90_cg",
+    "contest_id": "typical90",
+    "problem_index": "085",
+    "name": "Multiplication 085\uff08\u26054\uff09",
+    "title": "085. Multiplication 085\uff08\u26054\uff09",
+    "star": "4"
+  },
+  {
+    "id": "typical90_ch",
+    "contest_id": "typical90",
+    "problem_index": "086",
+    "name": "Snuke's Favorite Arrays\uff08\u26055\uff09",
+    "title": "086. Snuke's Favorite Arrays\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_ci",
+    "contest_id": "typical90",
+    "problem_index": "087",
+    "name": "Chokudai's Demand\uff08\u26055\uff09",
+    "title": "087. Chokudai's Demand\uff08\u26055\uff09",
+    "star": "5"
+  },
+  {
+    "id": "typical90_cj",
+    "contest_id": "typical90",
+    "problem_index": "088",
+    "name": "Similar but Different Ways\uff08\u26056\uff09",
+    "title": "088. Similar but Different Ways\uff08\u26056\uff09",
+    "star": "6"
+  },
+  {
+    "id": "typical90_ck",
+    "contest_id": "typical90",
+    "problem_index": "089",
+    "name": "Partitions and Inversions\uff08\u26057\uff09",
+    "title": "089. Partitions and Inversions\uff08\u26057\uff09",
+    "star": "7"
+  },
+  {
+    "id": "typical90_cl",
+    "contest_id": "typical90",
+    "problem_index": "090",
+    "name": "Tenkei90's Last Problem\uff08\u26057\uff09",
+    "title": "090. Tenkei90's Last Problem\uff08\u26057\uff09",
+    "star": "7"
+  }
+]

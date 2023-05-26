@@ -1,8 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ProblemsTable from '@/feature/problemsTable/problems-table.vue'
+</script>
 
 <template>
-  <main>
-    <h1>Home</h1>
-    <router-link to="/">Go to Root</router-link>
-  </main>
+  <ProblemsTable />
 </template>
