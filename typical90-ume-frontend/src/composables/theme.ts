@@ -63,6 +63,13 @@ type UseThemeFunction = () => {
   toggleTheme: () => void
 }
 
+/**
+ * カスタムのテーマを使用するためのフック関数です。
+ * `useTheme`フックを使用してテーマの情報を取得し、
+ * `localStorage` や `theme.global.name.value` を使用してテーマを設定します。
+ *
+ * @returns カスタムテーマに関連する情報と関数を持つオブジェクト
+ */
 const useMyTheme: UseThemeFunction = () => {
   const theme = useTheme()
 
@@ -86,6 +93,17 @@ const useMyTheme: UseThemeFunction = () => {
   })
 
   type toggleFunction = () => void
+
+  /**
+   * テーマを切り替える関数です。
+   * 現在のテーマが "dark" の場合、"light" テーマに切り替えます。
+   * 現在のテーマが "light" の場合、"dark" テーマに切り替えます。
+   * 切り替え後のテーマは `localStorage` と `theme.global.name.value` に保存されます。
+   *
+   * @remarks
+   * - `localStorage` に "theme" キーで保存されます。テーマの値は "light" または "dark" です。
+   * - `theme.global.name.value` にテーマの名前が保存されます。テーマの名前は "light" または "dark" です。
+   */
   const toggleTheme: toggleFunction = () => {
     if (typeof theme.global.current.value.dark !== 'boolean') {
       return
