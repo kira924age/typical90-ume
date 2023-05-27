@@ -19,6 +19,8 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@mdi/font": "^7.2.96",
+    "@mdi/js": "^7.2.96",
     "@rushstack/eslint-patch": "^1.2.0",
     "@tsconfig/strictest": "^2.0.1",
     "@types/node": "^18.14.2",
