@@ -2,6 +2,7 @@
 import { defineProps } from 'vue'
 import { VMenu, VList, VListItem, VListItemTitle } from 'vuetify/components'
 import { useRouter } from 'vue-router'
+import { mdiHome, mdiAccount, mdiInformationOutline, mdiBook } from '@mdi/js'
 
 type Properties = {
   open: boolean
@@ -16,25 +17,29 @@ const items = [
     title: 'Home',
     link: () => {
       router.push('/')
-    }
+    },
+    prependIcon: mdiHome
   },
   {
     title: 'User',
     link: () => {
       router.push('/user')
-    }
+    },
+    prependIcon: mdiAccount
   },
   {
     title: 'About',
     link: () => {
       router.push('/about')
-    }
+    },
+    prependIcon: mdiInformationOutline
   },
   {
     title: 'Ads',
     link: () => {
       router.push('/ads')
-    }
+    },
+    prependIcon: mdiBook
   }
 ]
 </script>
@@ -64,7 +69,13 @@ const items = [
     </div>
     <v-menu activator="parent">
       <v-list>
-        <v-list-item v-for="(item, index) in items" :key="index" :value="index" @click="item.link">
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          :value="index"
+          :prepend-icon="item.prependIcon"
+          @click="item.link"
+        >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
