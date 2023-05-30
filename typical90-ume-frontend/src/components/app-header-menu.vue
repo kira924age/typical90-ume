@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 type Properties = {
   isActive: boolean
   menuName: string
