@@ -38,7 +38,7 @@ const getStarClass = computed(() => {
     </template>
     <template #[`item.title`]="{ item }">
       <div class="problem-link">
-        <a :href="getLink(item.value)" target="_blank" rel="noopenner norefferer">
+        <a :href="getLink(item.value)" target="_blank" rel="noopener noreferrer">
           {{ item.columns.title }}
         </a>
       </div>
