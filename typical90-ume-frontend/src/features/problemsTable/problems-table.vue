@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { VTextField, VIcon, VTooltip } from 'vuetify/components'
+import { computed, ref, watch } from 'vue'
+import { VTextField, VIcon, VTooltip, VSwitch } from 'vuetify/components'
 import { VDataTable } from 'vuetify/labs/VDataTable'
 import { mdiSync } from '@mdi/js'
 import useSWRV from 'swrv'
@@ -8,6 +8,12 @@ import useSWRV from 'swrv'
 import problems from '../../assets/problems.json'
 import submission from './submission.json'
 import { problemTableCache, setHasClicked } from './cache'
+import { useLocalStorage } from '@/composables/use-local-storage'
+
+const [isHideAC, setIsHideAC] = useLocalStorage('isHideAC', false)
+watch(isHideAC, (newValue) => {
+  setIsHideAC(newValue)
+})
 
 // const loading = ref(false)
 const hasClicked2 = ref(problemTableCache.hasClicked)
@@ -47,6 +53,9 @@ const mp = computed(() => {
   return result
 })
 
+const displayProblems = computed(() => {
+  return isHideAC.value ? problems.filter((problem) => !mp?.value?.get(problem.id)) ?? [] : problems
+})
 const isAC = (problemId: string) => {
   return mp.value?.get(problemId) ? 'ac' : 'no'
 }
@@ -90,8 +99,21 @@ const getStarClass = computed(() => {
       </template>
     </v-text-field>
   </div>
+  <div class="hide-ac-switch">
+    <v-switch
+      v-model="isHideAC"
+      label="Hide Completed Problems"
+      color="indigo"
+      hide-details
+    ></v-switch>
+  </div>
 
-  <v-data-table :headers="headers" :items="problems" :items-per-page="-1" class="elevation-1">
+  <v-data-table
+    :headers="headers"
+    :items="displayProblems"
+    :items-per-page="-1"
+    class="elevation-1"
+  >
     <template #[`item.star`]="{ item }">
       <div class="parent-of-star-cell" :class="getStarClass(item.columns.star)">
         <div class="star-cell">
@@ -107,24 +129,6 @@ const getStarClass = computed(() => {
       </div>
     </template>
   </v-data-table>
-  <!--
-  <v-data-table :headers="headers" :items="problems" :items-per-page="-1" class="elevation-1">
-    <template #[`item.star`]="{ item }">
-      <div class="parent-of-star-cell" :class="getStarClass(item.columns.star)">
-        <div class="star-cell">
-          {{ item.columns.star }}
-        </div>
-      </div>
-    </template>
-    <template #[`item.title`]="{ item }">
-      <div class="problem-link" :class="f(item.value)">
-        <a :href="getLink(item.value)" target="_blank" rel="noopener noreferrer">
-          {{ item.columns.title }}
-        </a>
-      </div>
-    </template>
-  </v-data-table>
-  -->
 </template>
 
 <style lang="scss" scoped>
@@ -217,5 +221,9 @@ const getStarClass = computed(() => {
 .form-label {
   line-height: 40px;
   padding-right: 8px;
+}
+
+.hide-ac-switch {
+  display: inline-flex;
 }
 </style>
