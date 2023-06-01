@@ -3,17 +3,52 @@ import { computed, ref } from 'vue'
 import { VTextField, VIcon, VTooltip } from 'vuetify/components'
 import { VDataTable } from 'vuetify/labs/VDataTable'
 import { mdiSync } from '@mdi/js'
+import useSWRV from 'swrv'
 
 import problems from '../../assets/problems.json'
+import submission from './submission.json'
+import { hasClicked, setHasClicked } from './cache'
 
-const loaded = ref(false)
-const loading = ref(false)
+// const loading = ref(false)
+const hasClicked2 = ref(hasClicked)
+
+const sleep = (waitSeconds: number) => {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, waitSeconds * 1000)
+  })
+}
+const FakeAPI = async () => {
+  const result = await sleep(0.1).then(() => {
+    return submission
+  })
+  return result
+}
+const { data } = useSWRV(() => (hasClicked2.value ? '/api/data' : undefined), FakeAPI)
+
 const onClick = () => {
-  loading.value = true
-  setTimeout(() => {
-    loading.value = false
-    loaded.value = true
-  }, 2000)
+  hasClicked2.value = true
+  setHasClicked(true)
+}
+
+// const loaded = ref(false)
+const mp = computed(() => {
+  const result = new Map()
+  if (!data.value) {
+    return
+  }
+  for (const submission of data.value) {
+    const problemId = submission.problem_id
+    if (submission.result === 'AC') {
+      result.set(problemId, true)
+    }
+  }
+  return result
+})
+
+const isAC = (problemId: string) => {
+  return mp.value?.get(problemId) ? 'ac' : 'no'
 }
 
 const BASE_URL = 'https://atcoder.jp/contests/typical90/tasks/'
@@ -43,15 +78,7 @@ const getStarClass = computed(() => {
 <template>
   <div class="atcoder-input-field">
     <div class="form-label">AtCoder ID:</div>
-    <v-text-field
-      :loading="loading"
-      density="compact"
-      variant="solo"
-      label="AtCoder ID"
-      single-line
-      hide-details
-      @click:append-inner="onClick"
-    >
+    <v-text-field density="compact" variant="solo" label="AtCoder ID" single-line hide-details>
       <template #append-inner>
         <v-tooltip location="bottom" text="Fetch submissions">
           <template #activator="{ props }">
@@ -63,6 +90,7 @@ const getStarClass = computed(() => {
       </template>
     </v-text-field>
   </div>
+
   <v-data-table :headers="headers" :items="problems" :items-per-page="-1" class="elevation-1">
     <template #[`item.star`]="{ item }">
       <div class="parent-of-star-cell" :class="getStarClass(item.columns.star)">
@@ -72,13 +100,31 @@ const getStarClass = computed(() => {
       </div>
     </template>
     <template #[`item.title`]="{ item }">
-      <div class="problem-link">
+      <div class="problem-link" :class="isAC(item.value)">
         <a :href="getLink(item.value)" target="_blank" rel="noopener noreferrer">
           {{ item.columns.title }}
         </a>
       </div>
     </template>
   </v-data-table>
+  <!--
+  <v-data-table :headers="headers" :items="problems" :items-per-page="-1" class="elevation-1">
+    <template #[`item.star`]="{ item }">
+      <div class="parent-of-star-cell" :class="getStarClass(item.columns.star)">
+        <div class="star-cell">
+          {{ item.columns.star }}
+        </div>
+      </div>
+    </template>
+    <template #[`item.title`]="{ item }">
+      <div class="problem-link" :class="f(item.value)">
+        <a :href="getLink(item.value)" target="_blank" rel="noopener noreferrer">
+          {{ item.columns.title }}
+        </a>
+      </div>
+    </template>
+  </v-data-table>
+  -->
 </template>
 
 <style lang="scss" scoped>
@@ -87,8 +133,20 @@ const getStarClass = computed(() => {
 }
 
 .problem-link {
+  height: 100%;
+  width: 100%;
+
+  line-height: 42px;
+
   padding-left: 16px;
   padding-right: 16px;
+  &.ac {
+    background: #c3e6bd !important;
+  }
+}
+
+.dark .problem-link.ac {
+  background: #004e06 !important;
 }
 
 .problem-link a:hover {
@@ -107,6 +165,7 @@ const getStarClass = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
 }
 
 .star-cell {
