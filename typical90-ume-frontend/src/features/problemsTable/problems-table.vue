@@ -1,8 +1,20 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { VTextField, VIcon, VTooltip } from 'vuetify/components'
 import { VDataTable } from 'vuetify/labs/VDataTable'
+import { mdiSync } from '@mdi/js'
 
 import problems from '../../assets/problems.json'
+
+const loaded = ref(false)
+const loading = ref(false)
+const onClick = () => {
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+    loaded.value = true
+  }, 2000)
+}
 
 const BASE_URL = 'https://atcoder.jp/contests/typical90/tasks/'
 const headers = [
@@ -14,7 +26,8 @@ const headers = [
   },
   {
     title: '問題名',
-    key: 'title'
+    key: 'title',
+    sortable: false
   }
 ]
 
@@ -28,6 +41,28 @@ const getStarClass = computed(() => {
 </script>
 
 <template>
+  <div class="atcoder-input-field">
+    <div class="form-label">AtCoder ID:</div>
+    <v-text-field
+      :loading="loading"
+      density="compact"
+      variant="solo"
+      label="AtCoder ID"
+      single-line
+      hide-details
+      @click:append-inner="onClick"
+    >
+      <template #append-inner>
+        <v-tooltip location="bottom" text="Fetch submissions">
+          <template #activator="{ props }">
+            <v-icon v-bind="props" class="fetch-icon" @click="onClick">
+              {{ mdiSync }}
+            </v-icon>
+          </template>
+        </v-tooltip>
+      </template>
+    </v-text-field>
+  </div>
   <v-data-table :headers="headers" :items="problems" :items-per-page="-1" class="elevation-1">
     <template #[`item.star`]="{ item }">
       <div class="parent-of-star-cell" :class="getStarClass(item.columns.star)">
@@ -105,5 +140,23 @@ const getStarClass = computed(() => {
 
 .dark .parent-of-star-cell {
   opacity: 0.8;
+}
+
+::v-deep(.v-data-table-header__content) {
+  user-select: text;
+  font-weight: 500;
+}
+
+.fetch-icon {
+  cursor: pointer;
+}
+
+.atcoder-input-field {
+  display: flex;
+}
+
+.form-label {
+  line-height: 40px;
+  padding-right: 8px;
 }
 </style>
