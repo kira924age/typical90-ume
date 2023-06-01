@@ -7,10 +7,10 @@ import useSWRV from 'swrv'
 
 import problems from '../../assets/problems.json'
 import submission from './submission.json'
-import { hasClicked, setHasClicked } from './cache'
+import { problemTableCache, setHasClicked } from './cache'
 
 // const loading = ref(false)
-const hasClicked2 = ref(hasClicked)
+const hasClicked2 = ref(problemTableCache.hasClicked)
 
 const sleep = (waitSeconds: number) => {
   return new Promise<void>((resolve) => {

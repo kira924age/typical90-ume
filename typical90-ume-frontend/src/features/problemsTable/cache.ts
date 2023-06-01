@@ -1,6 +1,13 @@
-let hasClicked = false
+const problemTableCache = { hasClicked: false }
+
+/**
+ * Sets the value of hasClicked.
+ *
+ * @param value - The boolean value to set.
+ * @returns void
+ */
 const setHasClicked = (value: boolean): void => {
-  hasClicked = value
+  problemTableCache.hasClicked = value
 }
 
-export { hasClicked, setHasClicked }
+export { problemTableCache, setHasClicked }
