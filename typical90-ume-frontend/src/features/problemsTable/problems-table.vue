@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { VTextField, VIcon, VTooltip, VSwitch } from 'vuetify/components'
 import { VDataTable } from 'vuetify/labs/VDataTable'
-import { mdiSync } from '@mdi/js'
+import { mdiSync, mdiYoutube, mdiTwitter } from '@mdi/js'
+
 import useSWRV from 'swrv'
 
 import problems from '../../assets/problems.json'
@@ -10,10 +11,7 @@ import submission from './submission.json'
 import { problemTableCache, setHasClicked } from './cache'
 import { useLocalStorage } from '@/composables/use-local-storage'
 
-const [isHideAC, setIsHideAC] = useLocalStorage('isHideAC', false)
-watch(isHideAC, (newValue) => {
-  setIsHideAC(newValue)
-})
+const [isHideAC] = useLocalStorage('isHideAC', false)
 
 // const loading = ref(false)
 const hasClicked2 = ref(problemTableCache.hasClicked)
@@ -66,28 +64,48 @@ const headers = [
     title: '星',
     align: 'center',
     key: 'star',
-    width: '68px'
+    width: '72px'
   },
   {
     title: '問題名',
     key: 'title',
     sortable: false
+  },
+  {
+    title: '解説',
+    align: 'center',
+    key: 'editorial',
+    sortable: false,
+    width: '68px'
   }
 ]
 
 const getLink = computed(() => {
   return (id: string) => `${BASE_URL}${id}`
 })
-
 const getStarClass = computed(() => {
   return (star: string) => `star-${star}`
+})
+
+// TODO: O(n^2) -> O(n)
+const getTwitterLink = computed(() => {
+  return (id: string) => problems.find((problem) => problem.id === id)?.twitter ?? ''
+})
+const getYouTubeLink = computed(() => {
+  return (id: string) => problems.find((problem) => problem.id === id)?.youtube ?? ''
 })
 </script>
 
 <template>
   <div class="atcoder-input-field">
     <div class="form-label">AtCoder ID:</div>
-    <v-text-field density="compact" variant="solo" label="AtCoder ID" single-line hide-details>
+    <v-text-field
+      density="compact"
+      variant="solo-filled"
+      label="AtCoder ID"
+      single-line
+      hide-details
+    >
       <template #append-inner>
         <v-tooltip location="bottom" text="Fetch submissions">
           <template #activator="{ props }">
@@ -121,10 +139,26 @@ const getStarClass = computed(() => {
         </div>
       </div>
     </template>
+
     <template #[`item.title`]="{ item }">
       <div class="problem-link" :class="isAC(item.value)">
         <a :href="getLink(item.value)" target="_blank" rel="noopener noreferrer">
           {{ item.columns.title }}
+        </a>
+      </div>
+    </template>
+
+    <template #[`item.editorial`]="{ item }">
+      <div class="editorial-cell" :class="isAC(item.value)">
+        <a :href="getTwitterLink(item.value)" target="_blank" rel="noopener noreferrer">
+          <v-icon size="large" class="twitter-icon">
+            {{ mdiTwitter }}
+          </v-icon>
+        </a>
+        <a :href="getYouTubeLink(item.value)" target="_blank" rel="noopener noreferrer">
+          <v-icon size="large" class="youtube-icon">
+            {{ mdiYoutube }}
+          </v-icon>
         </a>
       </div>
     </template>
@@ -141,9 +175,8 @@ const getStarClass = computed(() => {
   width: 100%;
 
   line-height: 42px;
-
   padding-left: 16px;
-  padding-right: 16px;
+  // padding-right: 16px;
   &.ac {
     background: #c3e6bd !important;
   }
@@ -158,6 +191,12 @@ const getStarClass = computed(() => {
   text-decoration: underline;
 }
 
+::v-deep(tr) {
+  height: 42px !important;
+}
+::v-deep(th) {
+  height: 42px !important;
+}
 ::v-deep(.v-data-table__tr td) {
   padding: 0 !important;
   height: 42px !important;
@@ -225,5 +264,29 @@ const getStarClass = computed(() => {
 
 .hide-ac-switch {
   display: inline-flex;
+}
+
+.editorial-cell {
+  height: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  &.ac {
+    background: #c3e6bd !important;
+  }
+}
+.dark .editorial-cell.ac {
+  background: #004e06 !important;
+}
+
+.youtube-icon {
+  color: #ff0000;
+  cursor: pointer;
+}
+.twitter-icon {
+  color: #1da1f2;
+  cursor: pointer;
 }
 </style>

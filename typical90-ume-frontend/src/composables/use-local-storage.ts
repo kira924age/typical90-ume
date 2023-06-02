@@ -20,7 +20,7 @@ export const useLocalStorage = <T>(key: string, defaultValue: T): [Ref<T>, (v: T
     value.value = v
   }
 
-  watch([key, value], () => {
+  watch(value, () => {
     localStorage.setItem(key, JSON.stringify(value.value))
   })
 
