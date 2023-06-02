@@ -1,0 +1,221 @@
+<script setup lang="ts">
+import { VTextField, VIcon, VTooltip, VSwitch } from 'vuetify/components'
+import { mdiSync, mdiYoutube, mdiTwitter, mdiArrowDown, mdiArrowUp } from '@mdi/js'
+
+import { useLocalStorage } from '@/composables/use-local-storage'
+import { useProblems } from './composables/use-problems'
+import { useSubmissions } from './composables/use-submissions'
+import { useDisplayProblems } from './composables/use-display-problems'
+import { useSortProblems } from './composables/use-sort-problems'
+
+const [isHideAC] = useLocalStorage('isHideAC', false)
+const [isShowEditorialLink] = useLocalStorage('isShowEditorialLink', false)
+
+const { getProblemLink, getStarClass, getTwitterLink, getYouTubeLink } = useProblems()
+const { handleSubmissionFetchButtonClick, getSubmissionStatusClass, submissionStatusMap } =
+  useSubmissions()
+
+const { sortState, sortProblems } = useSortProblems()
+const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionStatusMap)
+</script>
+
+<template>
+  <div class="atcoder-input-field">
+    <div class="form-label">AtCoder ID:</div>
+    <v-text-field
+      density="compact"
+      variant="solo-filled"
+      label="AtCoder ID"
+      single-line
+      hide-details
+    >
+      <template #append-inner>
+        <v-tooltip location="bottom" text="Fetch submissions">
+          <template #activator="{ props }">
+            <v-icon v-bind="props" class="fetch-icon" @click="handleSubmissionFetchButtonClick">
+              {{ mdiSync }}
+            </v-icon>
+          </template>
+        </v-tooltip>
+      </template>
+    </v-text-field>
+  </div>
+
+  <div class="hide-ac-switch">
+    <v-switch
+      v-model="isHideAC"
+      label="Hide Completed Problems"
+      color="indigo"
+      hide-details
+      density="compact"
+    ></v-switch>
+  </div>
+  <div class="show-editorials-switch">
+    <v-switch
+      v-model="isShowEditorialLink"
+      label="Show Editorial Links"
+      color="indigo"
+      hide-details
+      density="compact"
+    ></v-switch>
+  </div>
+
+  <div class="problem-table-wrapper">
+    <table class="problem-table">
+      <thead>
+        <tr>
+          <th @click="sortProblems">
+            <div>
+              <span>星</span>
+              <v-icon v-if="sortState === 1">
+                {{ mdiArrowUp }}
+              </v-icon>
+              <v-icon v-if="sortState === 2">
+                {{ mdiArrowDown }}
+              </v-icon>
+            </div>
+          </th>
+          <th>問題名</th>
+          <th v-show="isShowEditorialLink">解説</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="problem in displayProblems"
+          :key="problem.id"
+          :class="getSubmissionStatusClass(problem.id)"
+        >
+          <td :class="getStarClass(problem.star)">{{ problem.star }}</td>
+          <td>
+            <a :href="getProblemLink(problem.id)" target="_blank" rel="noopener noreferrer">{{
+              problem.title
+            }}</a>
+          </td>
+          <td v-show="isShowEditorialLink">
+            <a :href="getTwitterLink(problem.id)" target="_blank" rel="noopener noreferrer">
+              <v-icon size="large" class="twitter-icon">
+                {{ mdiTwitter }}
+              </v-icon>
+            </a>
+            <a :href="getYouTubeLink(problem.id)" target="_blank" rel="noopener noreferrer">
+              <v-icon size="large" class="youtube-icon">
+                {{ mdiYoutube }}
+              </v-icon>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.problem-table-wrapper {
+  padding-top: 16px;
+}
+
+.problem-table {
+  width: 100%;
+
+  .dark & {
+    background: #212121;
+    & td:nth-child(1) {
+      opacity: 0.8;
+    }
+  }
+
+  th:nth-child(1) div {
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  td,
+  th {
+    height: 42px;
+  }
+
+  table,
+  td,
+  th {
+    border: 1px solid gray;
+    text-align: center;
+  }
+
+  & td:nth-child(1) {
+    color: black;
+    width: 72px;
+  }
+  & td:nth-child(2) {
+    text-align: left;
+    padding-left: 16px;
+    a:hover {
+      color: #2f81f7;
+      text-decoration: underline;
+    }
+  }
+  & td:nth-child(3) {
+    width: 68px;
+  }
+
+  & .ac td:nth-child(n + 2) {
+    background: #c3e6bd;
+  }
+  .dark & .ac td:nth-child(n + 2) {
+    background: #004e06;
+  }
+}
+
+.star-2 {
+  background: silver;
+}
+.star-3 {
+  background: #b08c56;
+}
+.star-4 {
+  background: #3faf3f;
+}
+.star-5 {
+  background: #00c0c0;
+}
+.star-6 {
+  background: #88f;
+}
+.star-7 {
+  background: rgb(192, 192, 0);
+}
+
+.fetch-icon {
+  cursor: pointer;
+}
+
+.atcoder-input-field {
+  display: flex;
+  padding-bottom: 16px;
+}
+
+.form-label {
+  line-height: 40px;
+  padding-right: 8px;
+}
+
+.hide-ac-switch {
+  display: inline-flex;
+  min-width: 275px;
+}
+.show-editorials-switch {
+  display: inline-flex;
+  min-width: 245px;
+}
+
+.youtube-icon {
+  color: #ff0000;
+  cursor: pointer;
+}
+.twitter-icon {
+  color: #1da1f2;
+  cursor: pointer;
+}
+</style>
