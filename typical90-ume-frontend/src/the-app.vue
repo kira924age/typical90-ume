@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router'
 <template>
   <AppHeader />
   <main class="max-w-screen-xl mx-auto">
-    <div class="py-4 mx-4">
+    <div class="py-12 mx-4">
       <RouterView />
     </div>
   </main>

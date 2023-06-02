@@ -59,6 +59,9 @@ const isAC = (problemId: string) => {
 }
 
 const BASE_URL = 'https://atcoder.jp/contests/typical90/tasks/'
+
+// type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
+const sortBy = ref([{ key: 'star', order: 'asc' }])
 const headers = [
   {
     title: '星',
@@ -127,6 +130,7 @@ const getYouTubeLink = computed(() => {
   </div>
 
   <v-data-table
+    v-model:sort-by="sortBy"
     :headers="headers"
     :items="displayProblems"
     :items-per-page="-1"
