@@ -14,6 +14,13 @@ interface DisplayProblems {
   displayProblems: Ref<Problem[]>
 }
 
+/**
+ * Creates a reactive list of display problems based on various filter and sort options.
+ * @param {Ref<boolean>} isHideAC - Ref indicating whether to hide problems with an AC status.
+ * @param {Ref<number>} sortState - Ref indicating the sort state: 0 for sorting by problem index, 1 for sorting by star rating, and any other value for sorting by star rating in reverse order.
+ * @param {Ref<Map<string, boolean>>} submissionStatusMap - Ref containing the map of problem IDs and their submission status.
+ * @returns {DisplayProblems} - An object containing a reactive Ref for the display problems.
+ */
 const useDisplayProblems = (
   isHideAC: Ref<boolean>,
   sortState: Ref<number>,

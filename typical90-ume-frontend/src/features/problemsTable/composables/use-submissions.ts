@@ -3,6 +3,11 @@ import { problemTableCache, setHasClicked } from '../cache'
 import submission from '../submission.json'
 import useSWRV from 'swrv'
 
+/**
+ * Pauses the execution for a specified number of seconds.
+ * @param {number} waitSeconds - The number of seconds to wait.
+ * @returns {Promise<void>}
+ */
 const sleep = async (waitSeconds: number): Promise<void> => {
   await new Promise<void>((resolve) => {
     setTimeout(() => {
@@ -11,6 +16,10 @@ const sleep = async (waitSeconds: number): Promise<void> => {
   })
 }
 
+/**
+ * Fake API function that simulates fetching submissions.
+ * @returns {Promise<Submission[] | undefined>} - A promise that resolves to an array of submissions or undefined.
+ */
 const FakeAPI = async (): Promise<Submission[] | undefined> => {
   const result = await sleep(2).then(() => {
     return submission
@@ -39,10 +48,18 @@ interface Submissions {
   submissionStatusMap: Ref<Map<string, boolean>>
 }
 
+/**
+ * Manages the submission-related data and functions.
+ * @returns {Submissions} - An object containing submission-related data and functions.
+ */
 const useSubmissions = (): Submissions => {
   const hasClicked = ref(problemTableCache.hasClicked)
   const { data } = useSWRV(() => (hasClicked.value ? '/api/data' : undefined), FakeAPI)
 
+  /**
+   * Computed property that maps problem IDs to submission status (AC or not).
+   * @type {Ref<Map<string, boolean>>}
+   */
   const submissionStatusMap = computed(() => {
     const result = new Map<string, boolean>()
     if (data.value === undefined) {
@@ -57,6 +74,10 @@ const useSubmissions = (): Submissions => {
     return result
   })
 
+  /**
+   * Computed function that determines the submission status class for a given problem ID.
+   * @type {Ref<(problemId: string) => string>}
+   */
   const getSubmissionStatusClass = computed(() => {
     return (problemId: string) => {
       const isOk = submissionStatusMap.value?.get(problemId) ?? false
@@ -64,6 +85,10 @@ const useSubmissions = (): Submissions => {
     }
   })
 
+  /**
+   * Handles the click event for the submission fetch button.
+   * @returns {void}
+   */
   const handleSubmissionFetchButtonClick = (): void => {
     hasClicked.value = true
     setHasClicked(true)
