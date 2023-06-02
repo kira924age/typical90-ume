@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { VTextField, VIcon, VTooltip, VSwitch } from 'vuetify/components'
-import { VDataTable } from 'vuetify/labs/VDataTable'
-import { mdiSync, mdiYoutube, mdiTwitter } from '@mdi/js'
+import { mdiSync, mdiYoutube, mdiTwitter, mdiArrowDown, mdiArrowUp } from '@mdi/js'
 
 import useSWRV from 'swrv'
 
@@ -12,6 +11,12 @@ import { problemTableCache, setHasClicked } from './cache'
 import { useLocalStorage } from '@/composables/use-local-storage'
 
 const [isHideAC] = useLocalStorage('isHideAC', false)
+const [sortState, setSortState] = useLocalStorage('sortState', 0)
+const [isShowEditorialLink] = useLocalStorage('isShowEditorialLink', false)
+
+const sortProblems = () => {
+  setSortState((sortState.value + 1) % 3)
+}
 
 // const loading = ref(false)
 const hasClicked2 = ref(problemTableCache.hasClicked)
@@ -52,36 +57,32 @@ const mp = computed(() => {
 })
 
 const displayProblems = computed(() => {
-  return isHideAC.value ? problems.filter((problem) => !mp?.value?.get(problem.id)) ?? [] : problems
+  if (sortState.value === 0) {
+    return (
+      isHideAC.value ? problems.filter((problem) => !mp?.value?.get(problem.id)) ?? [] : problems
+    ).sort((a, b) => {
+      return Number(a.problem_index) - Number(b.problem_index)
+    })
+  }
+  if (sortState.value === 1) {
+    return (
+      isHideAC.value ? problems.filter((problem) => !mp?.value?.get(problem.id)) ?? [] : problems
+    ).sort((a, b) => {
+      return Number(a.star) - Number(b.star)
+    })
+  }
+  return (
+    isHideAC.value ? problems.filter((problem) => !mp?.value?.get(problem.id)) ?? [] : problems
+  ).sort((a, b) => {
+    return Number(b.star) - Number(a.star)
+  })
 })
+
 const isAC = (problemId: string) => {
   return mp.value?.get(problemId) ? 'ac' : 'no'
 }
 
 const BASE_URL = 'https://atcoder.jp/contests/typical90/tasks/'
-
-// type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
-const sortBy = ref([{ key: 'star', order: 'asc' }])
-const headers = [
-  {
-    title: '星',
-    align: 'center',
-    key: 'star',
-    width: '72px'
-  },
-  {
-    title: '問題名',
-    key: 'title',
-    sortable: false
-  },
-  {
-    title: '解説',
-    align: 'center',
-    key: 'editorial',
-    sortable: false,
-    width: '68px'
-  }
-]
 
 const getLink = computed(() => {
   return (id: string) => `${BASE_URL}${id}`
@@ -120,106 +121,131 @@ const getYouTubeLink = computed(() => {
       </template>
     </v-text-field>
   </div>
+
   <div class="hide-ac-switch">
     <v-switch
       v-model="isHideAC"
       label="Hide Completed Problems"
       color="indigo"
       hide-details
+      density="compact"
+    ></v-switch>
+  </div>
+  <div class="show-editorials-switch">
+    <v-switch
+      v-model="isShowEditorialLink"
+      label="Show Editorial Links"
+      color="indigo"
+      hide-details
+      density="compact"
     ></v-switch>
   </div>
 
-  <v-data-table
-    v-model:sort-by="sortBy"
-    :headers="headers"
-    :items="displayProblems"
-    :items-per-page="-1"
-    class="elevation-1"
-  >
-    <template #[`item.star`]="{ item }">
-      <div class="parent-of-star-cell" :class="getStarClass(item.columns.star)">
-        <div class="star-cell">
-          {{ item.columns.star }}
-        </div>
-      </div>
-    </template>
-
-    <template #[`item.title`]="{ item }">
-      <div class="problem-link" :class="isAC(item.value)">
-        <a :href="getLink(item.value)" target="_blank" rel="noopener noreferrer">
-          {{ item.columns.title }}
-        </a>
-      </div>
-    </template>
-
-    <template #[`item.editorial`]="{ item }">
-      <div class="editorial-cell" :class="isAC(item.value)">
-        <a :href="getTwitterLink(item.value)" target="_blank" rel="noopener noreferrer">
-          <v-icon size="large" class="twitter-icon">
-            {{ mdiTwitter }}
-          </v-icon>
-        </a>
-        <a :href="getYouTubeLink(item.value)" target="_blank" rel="noopener noreferrer">
-          <v-icon size="large" class="youtube-icon">
-            {{ mdiYoutube }}
-          </v-icon>
-        </a>
-      </div>
-    </template>
-  </v-data-table>
+  <div class="problem-table-wrapper">
+    <table class="problem-table">
+      <thead>
+        <tr>
+          <th @click="sortProblems">
+            <div>
+              <span>星</span>
+              <v-icon v-if="sortState === 1">
+                {{ mdiArrowUp }}
+              </v-icon>
+              <v-icon v-if="sortState === 2">
+                {{ mdiArrowDown }}
+              </v-icon>
+            </div>
+          </th>
+          <th>問題名</th>
+          <th v-show="isShowEditorialLink">解説</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="problem in displayProblems" :key="problem.id" :class="isAC(problem.id)">
+          <td :class="getStarClass(problem.star)">{{ problem.star }}</td>
+          <td>
+            <a :href="getLink(problem.id)" target="_blank" rel="noopener noreferrer">{{
+              problem.title
+            }}</a>
+          </td>
+          <td v-show="isShowEditorialLink">
+            <a :href="getTwitterLink(problem.id)" target="_blank" rel="noopener noreferrer">
+              <v-icon size="large" class="twitter-icon">
+                {{ mdiTwitter }}
+              </v-icon>
+            </a>
+            <a :href="getYouTubeLink(problem.id)" target="_blank" rel="noopener noreferrer">
+              <v-icon size="large" class="youtube-icon">
+                {{ mdiYoutube }}
+              </v-icon>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-::v-deep(.v-data-table-footer) {
-  display: none;
+.problem-table-wrapper {
+  padding-top: 16px;
 }
 
-.problem-link {
-  height: 100%;
+.problem-table {
   width: 100%;
 
-  line-height: 42px;
-  padding-left: 16px;
-  // padding-right: 16px;
-  &.ac {
-    background: #c3e6bd !important;
+  .dark & {
+    background: #212121;
+    & td:nth-child(1) {
+      opacity: 0.8;
+    }
+  }
+
+  th:nth-child(1) div {
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  td,
+  th {
+    height: 42px;
+  }
+
+  table,
+  td,
+  th {
+    border: 1px solid gray;
+    text-align: center;
+  }
+
+  & td:nth-child(1) {
+    color: black;
+    width: 72px;
+  }
+  & td:nth-child(2) {
+    text-align: left;
+    padding-left: 16px;
+    a:hover {
+      color: #2f81f7;
+      text-decoration: underline;
+    }
+  }
+  & td:nth-child(3) {
+    width: 68px;
+  }
+
+  & .ac td:nth-child(n + 2) {
+    background: #c3e6bd;
+  }
+  .dark & .ac td:nth-child(n + 2) {
+    background: #004e06;
   }
 }
 
-.dark .problem-link.ac {
-  background: #004e06 !important;
-}
-
-.problem-link a:hover {
-  color: #2f81f7;
-  text-decoration: underline;
-}
-
-::v-deep(tr) {
-  height: 42px !important;
-}
-::v-deep(th) {
-  height: 42px !important;
-}
-::v-deep(.v-data-table__tr td) {
-  padding: 0 !important;
-  height: 42px !important;
-}
-
-.parent-of-star-cell {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-}
-
-.star-cell {
-  text-align: center;
-  justify-content: center;
-}
-
+// end here
 .star-2 {
   background: silver;
 }
@@ -244,21 +270,13 @@ const getYouTubeLink = computed(() => {
   background: rgb(192, 192, 0);
 }
 
-.dark .parent-of-star-cell {
-  opacity: 0.8;
-}
-
-::v-deep(.v-data-table-header__content) {
-  user-select: text;
-  font-weight: 500;
-}
-
 .fetch-icon {
   cursor: pointer;
 }
 
 .atcoder-input-field {
   display: flex;
+  padding-bottom: 16px;
 }
 
 .form-label {
@@ -268,6 +286,13 @@ const getYouTubeLink = computed(() => {
 
 .hide-ac-switch {
   display: inline-flex;
+  min-width: 275px;
+  padding-left: 16px;
+}
+.show-editorials-switch {
+  display: inline-flex;
+  min-width: 245px;
+  padding-left: 16px;
 }
 
 .editorial-cell {
@@ -280,9 +305,6 @@ const getYouTubeLink = computed(() => {
   &.ac {
     background: #c3e6bd !important;
   }
-}
-.dark .editorial-cell.ac {
-  background: #004e06 !important;
 }
 
 .youtube-icon {
