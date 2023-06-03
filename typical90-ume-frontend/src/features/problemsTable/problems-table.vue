@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { VTextField, VIcon, VTooltip, VSwitch } from 'vuetify/components'
-import { mdiSync, mdiYoutube, mdiTwitter, mdiArrowDown, mdiArrowUp } from '@mdi/js'
+import { VTextField, VIcon, VSwitch } from 'vuetify/components'
+import { mdiSync, mdiArrowDown, mdiArrowUp } from '@mdi/js'
 
 import { useLocalStorage } from '@/composables/use-local-storage'
 import { useProblems } from './composables/use-problems'
@@ -30,13 +30,9 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
       hide-details
     >
       <template #append-inner>
-        <v-tooltip location="bottom" text="Fetch submissions">
-          <template #activator="{ props }">
-            <v-icon v-bind="props" class="fetch-icon" @click="handleSubmissionFetchButtonClick">
-              {{ mdiSync }}
-            </v-icon>
-          </template>
-        </v-tooltip>
+        <v-icon class="fetch-icon" @click="handleSubmissionFetchButtonClick">
+          {{ mdiSync }}
+        </v-icon>
       </template>
     </v-text-field>
   </div>
@@ -92,16 +88,14 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
             }}</a>
           </td>
           <td v-show="isShowEditorialLink">
-            <a :href="getTwitterLink(problem.id)" target="_blank" rel="noopener noreferrer">
-              <v-icon size="large" class="twitter-icon">
-                {{ mdiTwitter }}
-              </v-icon>
-            </a>
-            <a :href="getYouTubeLink(problem.id)" target="_blank" rel="noopener noreferrer">
-              <v-icon size="large" class="youtube-icon">
-                {{ mdiYoutube }}
-              </v-icon>
-            </a>
+            <div class="editorial-icons">
+              <a :href="getTwitterLink(problem.id)" target="_blank" rel="noopener noreferrer">
+                <img src="@/assets/twitter-icon.png" width="24" height="24" />
+              </a>
+              <a :href="getYouTubeLink(problem.id)" target="_blank" rel="noopener noreferrer">
+                <img src="@/assets/youtube-icon.png" width="24" height="24" />
+              </a>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -210,12 +204,8 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
   min-width: 245px;
 }
 
-.youtube-icon {
-  color: #ff0000;
-  cursor: pointer;
-}
-.twitter-icon {
-  color: #1da1f2;
-  cursor: pointer;
+.editorial-icons {
+  display: flex;
+  justify-content: space-evenly;
 }
 </style>
