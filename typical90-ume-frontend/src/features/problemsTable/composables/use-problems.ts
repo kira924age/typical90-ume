@@ -15,6 +15,7 @@ interface Problems {
 
 interface Problem {
   id: string
+  star: string
   twitter: string
   youtube: string
 }
@@ -63,4 +64,4 @@ const useProblems = (): Problems => {
   return { getProblemLink, getStarClass, getTwitterLink, getYouTubeLink }
 }
 
-export { useProblems }
+export { useProblems, problemMap }

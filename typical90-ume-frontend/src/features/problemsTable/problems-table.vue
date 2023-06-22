@@ -21,16 +21,16 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
 
 <template>
   <div class="atcoder-input-field">
-    <div class="form-label">AtCoder ID:</div>
     <v-text-field
       density="compact"
       variant="solo-filled"
       label="AtCoder ID"
       single-line
       hide-details
+      flat
     >
       <template #append-inner>
-        <v-icon class="fetch-icon" @click="handleSubmissionFetchButtonClick">
+        <v-icon @click="handleSubmissionFetchButtonClick">
           {{ mdiSync }}
         </v-icon>
       </template>
@@ -178,21 +178,12 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
   background: #88f;
 }
 .star-7 {
-  background: rgb(192, 192, 0);
-}
-
-.fetch-icon {
-  cursor: pointer;
+  background: #c0c000;
 }
 
 .atcoder-input-field {
   display: flex;
   padding-bottom: 16px;
-}
-
-.form-label {
-  line-height: 40px;
-  padding-right: 8px;
 }
 
 .hide-ac-switch {

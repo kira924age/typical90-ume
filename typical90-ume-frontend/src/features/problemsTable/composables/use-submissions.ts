@@ -2,6 +2,8 @@ import { ref, computed, type Ref } from 'vue'
 import { problemTableCache, setHasClicked } from '../cache'
 import submission from '../submission.json'
 import useSWRV from 'swrv'
+import problems from '../../../assets/problems.json'
+import type Submission from '@/types/submission'
 
 /**
  * Pauses the execution for a specified number of seconds.
@@ -27,25 +29,13 @@ const FakeAPI = async (): Promise<Submission[] | undefined> => {
   return result
 }
 
-interface Submission {
-  id: number
-  epoch_second: number
-  problem_id: string
-  contest_id: string
-  user_id: string
-  language: string
-  point: number
-  length: number
-  result: string
-  execution_time: number
-}
-
 interface Submissions {
   hasClicked: Ref<boolean>
   handleSubmissionFetchButtonClick: () => void
-  data: Ref<Submission[] | undefined>
+  submissions: Ref<Submission[] | undefined>
   getSubmissionStatusClass: Ref<(problemId: string) => string>
   submissionStatusMap: Ref<Map<string, boolean>>
+  getAcCount: Ref<(star: number) => number>
 }
 
 /**
@@ -54,7 +44,10 @@ interface Submissions {
  */
 const useSubmissions = (): Submissions => {
   const hasClicked = ref(problemTableCache.hasClicked)
-  const { data } = useSWRV(() => (hasClicked.value ? '/api/data' : undefined), FakeAPI)
+  const { data: submissions } = useSWRV(
+    () => (hasClicked.value ? '/api/submissions' : undefined),
+    FakeAPI
+  )
 
   /**
    * Computed property that maps problem IDs to submission status (AC or not).
@@ -62,10 +55,10 @@ const useSubmissions = (): Submissions => {
    */
   const submissionStatusMap = computed(() => {
     const result = new Map<string, boolean>()
-    if (data.value === undefined) {
+    if (submissions.value === undefined) {
       return result
     }
-    for (const submission of data.value) {
+    for (const submission of submissions.value) {
       const problemId = submission.problem_id
       if (submission.result === 'AC') {
         result.set(problemId, true)
@@ -94,12 +87,42 @@ const useSubmissions = (): Submissions => {
     setHasClicked(true)
   }
 
+  /**
+   * Computed property that calculates the count of AC submissions for each star rating.
+   * @type {Ref<Map<number, number>>}
+   */
+  const acCountMap = computed(() => {
+    const acCountMap = new Map<number, number>()
+    for (const problem of problems) {
+      const star: number = Number(problem.star)
+      const isAC: boolean = submissionStatusMap.value.get(problem.id) ?? false
+
+      if (isAC) {
+        const acCount: number = acCountMap.get(star) ?? 0
+        acCountMap.set(star, acCount + 1)
+      }
+    }
+    return acCountMap
+  })
+
+  /**
+   * Computed function that returns the count of AC submissions for a given star rating.
+   * @type {Ref<(star: number) => number>}
+   * @returns {number} - The count of AC submissions for a given star rating.
+   */
+  const getAcCount = computed(() => {
+    return (star: number): number => {
+      return acCountMap.value.get(star) ?? 0
+    }
+  })
+
   return {
     hasClicked,
     handleSubmissionFetchButtonClick,
-    data,
+    submissions,
     getSubmissionStatusClass,
-    submissionStatusMap
+    submissionStatusMap,
+    getAcCount
   }
 }
 

@@ -4,7 +4,6 @@ import UserStatus from '@/features/userStatus/user-status.vue'
 
 <template>
   <main>
-    <h1>User</h1>
     <UserStatus />
   </main>
 </template>
