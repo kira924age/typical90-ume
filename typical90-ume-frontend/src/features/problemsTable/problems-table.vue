@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { VTextField, VIcon, VTooltip, VSwitch } from 'vuetify/components'
-import { mdiSync, mdiYoutube, mdiTwitter, mdiArrowDown, mdiArrowUp } from '@mdi/js'
+import { VTextField, VIcon, VSwitch } from 'vuetify/components'
+import { mdiSync, mdiArrowDown, mdiArrowUp } from '@mdi/js'
 
 import { useLocalStorage } from '@/composables/use-local-storage'
-import { useProblems } from './composables/use-problems'
-import { useSubmissions } from './composables/use-submissions'
-import { useDisplayProblems } from './composables/use-display-problems'
-import { useSortProblems } from './composables/use-sort-problems'
+import { useSubmissions } from '@/composables/use-submissions'
+import { useProblems } from '@/composables/use-problems'
+import { useDisplayProblems } from '@/features/problemsTable/composables/use-display-problems'
+import { useSortProblems } from '@/features/problemsTable/composables/use-sort-problems'
 
 const [isHideAC] = useLocalStorage('isHideAC', false)
 const [isShowEditorialLink] = useLocalStorage('isShowEditorialLink', false)
 
-const { getProblemLink, getStarClass, getTwitterLink, getYouTubeLink } = useProblems()
+const { getProblemLink, getStarClass, getGitHubLink, getYouTubeLink } = useProblems()
 const { handleSubmissionFetchButtonClick, getSubmissionStatusClass, submissionStatusMap } =
   useSubmissions()
 
@@ -21,22 +21,18 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
 
 <template>
   <div class="atcoder-input-field">
-    <div class="form-label">AtCoder ID:</div>
     <v-text-field
       density="compact"
       variant="solo-filled"
       label="AtCoder ID"
       single-line
       hide-details
+      flat
     >
       <template #append-inner>
-        <v-tooltip location="bottom" text="Fetch submissions">
-          <template #activator="{ props }">
-            <v-icon v-bind="props" class="fetch-icon" @click="handleSubmissionFetchButtonClick">
-              {{ mdiSync }}
-            </v-icon>
-          </template>
-        </v-tooltip>
+        <v-icon @click="handleSubmissionFetchButtonClick">
+          {{ mdiSync }}
+        </v-icon>
       </template>
     </v-text-field>
   </div>
@@ -86,22 +82,20 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
           :class="getSubmissionStatusClass(problem.id)"
         >
           <td :class="getStarClass(problem.star)">{{ problem.star }}</td>
-          <td>
+          <td :class="`title-${getStarClass(problem.star)}`">
             <a :href="getProblemLink(problem.id)" target="_blank" rel="noopener noreferrer">{{
               problem.title
             }}</a>
           </td>
           <td v-show="isShowEditorialLink">
-            <a :href="getTwitterLink(problem.id)" target="_blank" rel="noopener noreferrer">
-              <v-icon size="large" class="twitter-icon">
-                {{ mdiTwitter }}
-              </v-icon>
-            </a>
-            <a :href="getYouTubeLink(problem.id)" target="_blank" rel="noopener noreferrer">
-              <v-icon size="large" class="youtube-icon">
-                {{ mdiYoutube }}
-              </v-icon>
-            </a>
+            <div class="editorial-icons">
+              <a :href="getGitHubLink(problem.id)" target="_blank" rel="noopener noreferrer">
+                <img src="@/assets/github-icon.png" width="24" height="24" />
+              </a>
+              <a :href="getYouTubeLink(problem.id)" target="_blank" rel="noopener noreferrer">
+                <img src="@/assets/youtube-icon.png" width="24" height="24" />
+              </a>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -110,6 +104,11 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
 </template>
 
 <style lang="scss" scoped>
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
 .problem-table-wrapper {
   padding-top: 16px;
 }
@@ -168,6 +167,14 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
   }
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  .dark & {
+    color: white;
+  }
+}
+
 .star-2 {
   background: silver;
 }
@@ -184,21 +191,12 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
   background: #88f;
 }
 .star-7 {
-  background: rgb(192, 192, 0);
-}
-
-.fetch-icon {
-  cursor: pointer;
+  background: #c0c000;
 }
 
 .atcoder-input-field {
   display: flex;
   padding-bottom: 16px;
-}
-
-.form-label {
-  line-height: 40px;
-  padding-right: 8px;
 }
 
 .hide-ac-switch {
@@ -210,12 +208,9 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
   min-width: 245px;
 }
 
-.youtube-icon {
-  color: #ff0000;
-  cursor: pointer;
-}
-.twitter-icon {
-  color: #1da1f2;
-  cursor: pointer;
+.editorial-icons {
+  display: flex;
+  height: 24px;
+  justify-content: space-evenly;
 }
 </style>

@@ -1,7 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
-  <main>
-    <h1>About</h1>
-  </main>
+  <h1>About</h1>
 </template>
