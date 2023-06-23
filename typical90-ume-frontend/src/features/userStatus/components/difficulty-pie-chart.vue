@@ -49,7 +49,7 @@ const color = computed(() => {
 })
 
 const labels = computed(() => {
-  return 'AC: ' + String(properties.ac)
+  return `AC: ${String(properties.ac)}`
 })
 
 const chartOptions = computed(() => {
@@ -78,7 +78,7 @@ const chartOptions = computed(() => {
             fontSize: '24px',
             show: true,
             formatter: (value: number) => {
-              return value.toFixed(1) + '%'
+              return `${value.toFixed(1)}%`
             }
           }
         }

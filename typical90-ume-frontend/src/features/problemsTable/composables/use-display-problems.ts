@@ -1,12 +1,12 @@
 import { computed, type Ref } from 'vue'
-import problems from '../../../assets/problems.json'
+import problems from '@/assets/problems.json'
 
 interface Problem {
   id: string
   title: string
   problem_index: string
   star: string
-  twitter: string
+  github: string
   youtube: string
 }
 

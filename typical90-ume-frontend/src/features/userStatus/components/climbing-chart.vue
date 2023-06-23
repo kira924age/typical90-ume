@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { problemMap } from '../../problemsTable/composables/use-problems'
+import { problemMap } from '@/constants/problem'
 import type Submission from '@/types/submission'
 
 const properties = defineProps<{

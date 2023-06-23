@@ -1,26 +1,17 @@
-import problems from '../../../assets/problems.json'
 import { computed, type ComputedRef } from 'vue'
+import { problemMap } from '@/constants/problem'
 
 type GetProblemLinkFunction = (id: string) => string
 type GetStarClassFunction = (id: string) => string
-type GetTwitterLinkFunction = (id: string) => string
+type GetGitHubLinkFunction = (id: string) => string
 type GetYouTubeLinkFunction = (id: string) => string
 
 interface Problems {
   getProblemLink: ComputedRef<GetProblemLinkFunction>
   getStarClass: ComputedRef<GetStarClassFunction>
-  getTwitterLink: ComputedRef<GetTwitterLinkFunction>
+  getGitHubLink: ComputedRef<GetGitHubLinkFunction>
   getYouTubeLink: ComputedRef<GetYouTubeLinkFunction>
 }
-
-interface Problem {
-  id: string
-  star: string
-  twitter: string
-  youtube: string
-}
-
-const problemMap = new Map<string, Problem>(problems.map((problem) => [problem.id, problem]))
 
 /**
  * Creates a collection of computed functions to retrieve problem-related data.
@@ -46,11 +37,11 @@ const useProblems = (): Problems => {
   })
 
   /**
-   * Computed function that retrieves the Twitter link for a given problem ID.
-   * @type {ComputedRef<GetTwitterLinkFunction>}
+   * Computed function that retrieves the GitHub link for a given problem ID.
+   * @type {ComputedRef<GetGitHubLinkFunction>}
    */
-  const getTwitterLink: ComputedRef<GetTwitterLinkFunction> = computed(() => {
-    return (id: string) => problemMap.get(id)?.twitter ?? ''
+  const getGitHubLink: ComputedRef<GetGitHubLinkFunction> = computed(() => {
+    return (id: string) => problemMap.get(id)?.github ?? ''
   })
 
   /**
@@ -61,7 +52,7 @@ const useProblems = (): Problems => {
     return (id: string) => problemMap.get(id)?.youtube ?? ''
   })
 
-  return { getProblemLink, getStarClass, getTwitterLink, getYouTubeLink }
+  return { getProblemLink, getStarClass, getGitHubLink, getYouTubeLink }
 }
 
-export { useProblems, problemMap }
+export { useProblems }

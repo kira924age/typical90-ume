@@ -1,8 +1,8 @@
 import { ref, computed, type Ref } from 'vue'
-import { problemTableCache, setHasClicked } from '../cache'
-import submission from '../submission.json'
 import useSWRV from 'swrv'
-import problems from '../../../assets/problems.json'
+import { problemTableCache, setHasClicked } from '@/utils/cache'
+import submission from '@/assets/submission.json'
+import problems from '@/assets/problems.json'
 import type Submission from '@/types/submission'
 
 /**
@@ -94,7 +94,7 @@ const useSubmissions = (): Submissions => {
   const acCountMap = computed(() => {
     const acCountMap = new Map<number, number>()
     for (const problem of problems) {
-      const star: number = Number(problem.star)
+      const star = Number(problem.star)
       const isAC: boolean = submissionStatusMap.value.get(problem.id) ?? false
 
       if (isAC) {
