@@ -5,7 +5,7 @@ cd $SCRIPT_DIR
 
 wget https://s3-ap-northeast-1.amazonaws.com/kenkoooo/submissions.csv.gz
 gzip -d submissions.csv.gz
-python generate_csv.py
+python3 generate_csv.py
 rm submissions.csv
 
 sqlite3 typical90.db < ./create_table.sql
