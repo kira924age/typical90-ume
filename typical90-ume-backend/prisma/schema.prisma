@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model submissions {
+  id             Int     @id @default(autoincrement())
+  epoch_second   Int?
+  problem_id     String?
+  contest_id     String?
+  user_id        String?
+  language       String?
+  point          Int?
+  length         Int?
+  result         String?
+  execution_time String?
+
+  @@index([user_id], map: "user_id")
+  @@index([epoch_second], map: "submissions_epoch_second_index")
+}
