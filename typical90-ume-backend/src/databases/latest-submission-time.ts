@@ -22,4 +22,6 @@ export const getLatestSubmissionTime = async () => {
   } catch (err) {
     console.log(err);
   }
+
+  return;
 };

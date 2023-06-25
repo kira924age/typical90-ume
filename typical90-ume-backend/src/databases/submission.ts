@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { getLatestSubmissionTime } from "./latest-submission-time";
 
-// ignore JS-0359
+// skipcq: JS-0359 Detected the use of require statements except in import statements
 const fetch = require("node-fetch");
 
 /**
@@ -35,7 +35,7 @@ export const readSubmissionsFromDb = async (userId: string) => {
     });
 
     let lastSubmissionTime = (await getLatestSubmissionTime()) ?? 0;
-    while (true) {
+    for (let i = 0; i < 100; i++) {
       const url = `https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=${userId}&from_second=${String(
         lastSubmissionTime + 1
       )}`;
