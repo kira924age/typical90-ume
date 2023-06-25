@@ -13,9 +13,10 @@ const [hasClicked, setHasClicked] = useLocalStorage('hasClicked', false)
 
 const { getAcCount, submissions } = useSubmissions(userId, hasClicked)
 
-const handleInput = () => {
-  setHasClicked(false)
-}
+/**
+ * Handles the button click event for fetching submissions.
+ * If the user ID is not empty, it sets the 'hasClicked' state to true.
+ */
 const handleSubmissionFetchButtonClick = () => {
   if (userId.value !== '') {
     setHasClicked(true)
@@ -34,7 +35,7 @@ const handleSubmissionFetchButtonClick = () => {
     hide-details
     flat
     @keypress.enter="handleSubmissionFetchButtonClick"
-    @input="handleInput"
+    @input="setHasClicked(false)"
   >
     <template #append-inner>
       <v-icon @click="handleSubmissionFetchButtonClick">

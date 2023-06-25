@@ -48,9 +48,12 @@ const { isOpen, toggleIsOpen, setIsOpen } = useOpen()
 
 <style scoped lang="scss">
 .navigation-bar {
+  position: fixed;
+  width: 100%;
   background: #242526;
   border-color: #e5e7eb;
   height: 3.5rem;
+  z-index: 999;
 }
 
 .navigation-item-container {

@@ -20,9 +20,11 @@ const { getSubmissionStatusClass, submissionStatusMap } = useSubmissions(userId,
 const { sortState, sortProblems } = useSortProblems()
 const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionStatusMap)
 
-const handleInput = () => {
-  setHasClicked(false)
-}
+/**
+ * Fetches data from a specified URL.
+ * @param url - The URL to fetch data from.
+ * @returns A promise that resolves to an array of submissions.
+ */
 const handleSubmissionFetchButtonClick = () => {
   if (userId.value !== '') {
     setHasClicked(true)
@@ -41,7 +43,7 @@ const handleSubmissionFetchButtonClick = () => {
       hide-details
       flat
       @keyup.enter="handleSubmissionFetchButtonClick"
-      @input="handleInput"
+      @input="setHasClicked(false)"
     >
       <template #append-inner>
         <v-icon @click="handleSubmissionFetchButtonClick">

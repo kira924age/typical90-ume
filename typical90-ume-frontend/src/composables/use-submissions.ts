@@ -14,8 +14,17 @@ interface Submissions {
   getAcCount: Ref<(star: number) => number>
 }
 
+/**
+ * Fetches data from a specified URL.
+ * @param url - The URL to fetch data from.
+ * @returns A promise that resolves to an array of submissions.
+ */
 const fetcher = async (url: string): Promise<Submission[]> => {
-  return await fetch(url).then(async (response) => await response.json())
+  const data = await fetch(url).then(async (response) => {
+    const result = await response.json()
+    return result
+  })
+  return data
 }
 
 /**
