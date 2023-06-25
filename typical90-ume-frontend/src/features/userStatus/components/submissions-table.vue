@@ -85,7 +85,8 @@ const displaySubmissions = computed(() => {
       active-color="indigo"
       :border="true"
       :length="paginationLength"
-      :total-visible="10"
+      :total-visible="6"
+      density="compact"
     ></v-pagination>
   </div>
 </template>
