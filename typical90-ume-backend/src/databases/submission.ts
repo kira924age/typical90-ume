@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { getLatestSubmissionTime } from "./latest-submission-time";
 
+// ignore JS-0359
 const fetch = require("node-fetch");
 
 /**
@@ -34,12 +35,10 @@ export const readSubmissionsFromDb = async (userId: string) => {
     });
 
     let lastSubmissionTime = (await getLatestSubmissionTime()) ?? 0;
-    while (1) {
-      const url =
-        "https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=" +
-        userId +
-        "&from_second=" +
-        String(lastSubmissionTime + 1);
+    while (true) {
+      const url = `https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=${userId}&from_second=${String(
+        lastSubmissionTime + 1
+      )}`;
       const res = await fetch(url, {
         headers: { "Accept-Encoding": "gzip" },
       });
