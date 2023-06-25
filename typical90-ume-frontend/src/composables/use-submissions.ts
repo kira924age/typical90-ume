@@ -1,37 +1,13 @@
-import { ref, computed, type Ref } from 'vue'
+import { computed, type Ref } from 'vue'
 import useSWRV from 'swrv'
-import { problemTableCache, setHasClicked } from '@/utils/cache'
-import submission from '@/assets/submission.json'
+// import { problemTableCache, setHasClicked2 } from '@/utils/cache'
 import problems from '@/assets/problems.json'
 import type Submission from '@/types/submission'
 
-/**
- * Pauses the execution for a specified number of seconds.
- * @param {number} waitSeconds - The number of seconds to wait.
- * @returns {Promise<void>}
- */
-const sleep = async (waitSeconds: number): Promise<void> => {
-  await new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve()
-    }, waitSeconds * 1000)
-  })
-}
-
-/**
- * Fake API function that simulates fetching submissions.
- * @returns {Promise<Submission[] | undefined>} - A promise that resolves to an array of submissions or undefined.
- */
-const FakeAPI = async (): Promise<Submission[] | undefined> => {
-  const result = await sleep(2).then(() => {
-    return submission
-  })
-  return result
-}
-
 interface Submissions {
-  hasClicked: Ref<boolean>
-  handleSubmissionFetchButtonClick: () => void
+  // hasClicked: Ref<boolean>
+  // setHasClicked: (hasClicked: boolean) => void
+  // handleSubmissionFetchButtonClick: () => void
   submissions: Ref<Submission[] | undefined>
   getSubmissionStatusClass: Ref<(problemId: string) => string>
   submissionStatusMap: Ref<Map<string, boolean>>
@@ -39,14 +15,28 @@ interface Submissions {
 }
 
 /**
+ * Fetches data from a specified URL.
+ * @param url - The URL to fetch data from.
+ * @returns A promise that resolves to an array of submissions.
+ */
+const fetcher = async (url: string): Promise<Submission[]> => {
+  const data = await fetch(url).then(async (response) => {
+    const result = await response.json()
+    return result
+  })
+  return data
+}
+
+/**
  * Manages the submission-related data and functions.
  * @returns {Submissions} - An object containing submission-related data and functions.
  */
-const useSubmissions = (): Submissions => {
-  const hasClicked = ref(problemTableCache.hasClicked)
+const useSubmissions = (userId: Ref<string>, hasClicked: Ref<boolean>): Submissions => {
+  // const hasClicked = ref(problemTableCache.hasClicked)
+  const BASE_URL = 'https://api.typical90.win/submissions'
   const { data: submissions } = useSWRV(
-    () => (hasClicked.value ? '/api/submissions' : undefined),
-    FakeAPI
+    () => (hasClicked.value && userId.value !== '' ? `${BASE_URL}/${userId.value}` : undefined),
+    fetcher
   )
 
   /**
@@ -78,14 +68,20 @@ const useSubmissions = (): Submissions => {
     }
   })
 
+  // const setHasClicked = (value: boolean): void => {
+  //   hasClicked.value = value
+  // }
+
   /**
    * Handles the click event for the submission fetch button.
    * @returns {void}
    */
-  const handleSubmissionFetchButtonClick = (): void => {
-    hasClicked.value = true
-    setHasClicked(true)
-  }
+  // const handleSubmissionFetchButtonClick = (): void => {
+  //   setHasClicked(true)
+  //   setHasClicked2(true)
+  //   console.log('fetch!!!')
+  //   console.log(submissions.value)
+  // }
 
   /**
    * Computed property that calculates the count of AC submissions for each star rating.
@@ -117,8 +113,9 @@ const useSubmissions = (): Submissions => {
   })
 
   return {
-    hasClicked,
-    handleSubmissionFetchButtonClick,
+    // hasClicked,
+    // setHasClicked,
+    // handleSubmissionFetchButtonClick,
     submissions,
     getSubmissionStatusClass,
     submissionStatusMap,

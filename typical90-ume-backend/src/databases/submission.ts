@@ -14,6 +14,9 @@ export const readSubmissionsFromDb = async (userId: string) => {
       where: {
         user_id: userId,
       },
+      orderBy: {
+        epoch_second: "desc",
+      },
     });
 
     return submissions;

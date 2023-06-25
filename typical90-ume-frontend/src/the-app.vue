@@ -15,7 +15,7 @@ main {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 3rem;
+  padding-top: 6.5rem;
   padding-bottom: 3rem;
   padding-left: 1rem;
   padding-right: 1rem;

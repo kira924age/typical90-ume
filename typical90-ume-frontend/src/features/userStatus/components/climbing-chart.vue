@@ -31,7 +31,7 @@ const stackAreaData = computed(() => {
     return response
   }
 
-  for (const submission of properties.submissions) {
+  for (const submission of [...properties.submissions].reverse()) {
     const problemId = submission.problem_id
     const unixTime = submission.epoch_second * 1000
     const result = submission.result
