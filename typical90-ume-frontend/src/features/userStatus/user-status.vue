@@ -4,13 +4,28 @@ import { mdiSync } from '@mdi/js'
 
 import DifficultyPieChart from '@/features/userStatus/components/difficulty-pie-chart.vue'
 import ClimbingChart from '@/features/userStatus/components/climbing-chart.vue'
+import SubmissionsTable from '@/features/userStatus/components/submissions-table.vue'
 import { useSubmissions } from '@/composables/use-submissions'
+import { useLocalStorage } from '@/composables/use-local-storage'
 
-const { handleSubmissionFetchButtonClick, getAcCount, submissions } = useSubmissions()
+const [userId] = useLocalStorage('userId', '')
+const [hasClicked, setHasClicked] = useLocalStorage('hasClicked', false)
+
+const { getAcCount, submissions } = useSubmissions(userId, hasClicked)
+
+const handleInput = () => {
+  setHasClicked(false)
+}
+const handleSubmissionFetchButtonClick = () => {
+  if (userId.value !== '') {
+    setHasClicked(true)
+  }
+}
 </script>
 
 <template>
   <v-text-field
+    v-model="userId"
     class="atcoder-id-input"
     density="compact"
     variant="solo-filled"
@@ -18,6 +33,8 @@ const { handleSubmissionFetchButtonClick, getAcCount, submissions } = useSubmiss
     single-line
     hide-details
     flat
+    @keypress.enter="handleSubmissionFetchButtonClick"
+    @input="handleInput"
   >
     <template #append-inner>
       <v-icon @click="handleSubmissionFetchButtonClick">
@@ -42,6 +59,14 @@ const { handleSubmissionFetchButtonClick, getAcCount, submissions } = useSubmiss
 
   <div class="climbing-chart-container">
     <ClimbingChart :submissions="submissions" />
+  </div>
+
+  <div class="user-heading-wrapper">
+    <div class="user-heading">Submissions</div>
+  </div>
+
+  <div class="submissions-table-container">
+    <SubmissionsTable :submissions="submissions" />
   </div>
 </template>
 
@@ -73,5 +98,11 @@ const { handleSubmissionFetchButtonClick, getAcCount, submissions } = useSubmiss
 
 .climbing-chart-container {
   padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.submissions-table-container {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
 }
 </style>

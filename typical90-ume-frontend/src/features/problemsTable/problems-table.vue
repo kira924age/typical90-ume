@@ -12,22 +12,36 @@ const [isHideAC] = useLocalStorage('isHideAC', false)
 const [isShowEditorialLink] = useLocalStorage('isShowEditorialLink', false)
 
 const { getProblemLink, getStarClass, getGitHubLink, getYouTubeLink } = useProblems()
-const { handleSubmissionFetchButtonClick, getSubmissionStatusClass, submissionStatusMap } =
-  useSubmissions()
+
+const [userId] = useLocalStorage('userId', '')
+const [hasClicked, setHasClicked] = useLocalStorage('hasClicked', false)
+const { getSubmissionStatusClass, submissionStatusMap } = useSubmissions(userId, hasClicked)
 
 const { sortState, sortProblems } = useSortProblems()
 const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionStatusMap)
+
+const handleInput = () => {
+  setHasClicked(false)
+}
+const handleSubmissionFetchButtonClick = () => {
+  if (userId.value !== '') {
+    setHasClicked(true)
+  }
+}
 </script>
 
 <template>
   <div class="atcoder-input-field">
     <v-text-field
+      v-model="userId"
       density="compact"
       variant="solo-filled"
       label="AtCoder ID"
       single-line
       hide-details
       flat
+      @keyup.enter="handleSubmissionFetchButtonClick"
+      @input="handleInput"
     >
       <template #append-inner>
         <v-icon @click="handleSubmissionFetchButtonClick">
@@ -57,7 +71,7 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
   </div>
 
   <div class="problem-table-wrapper">
-    <table class="problem-table">
+    <table>
       <thead>
         <tr>
           <th @click="sortProblems">
@@ -107,13 +121,6 @@ const { displayProblems } = useDisplayProblems(isHideAC, sortState, submissionSt
 table {
   border-spacing: 0;
   border-collapse: collapse;
-}
-
-.problem-table-wrapper {
-  padding-top: 16px;
-}
-
-.problem-table {
   width: 100%;
 
   .dark & {
@@ -136,7 +143,6 @@ table {
     height: 42px;
   }
 
-  table,
   td,
   th {
     border: 1px solid gray;
@@ -173,6 +179,10 @@ a {
   .dark & {
     color: white;
   }
+}
+
+.problem-table-wrapper {
+  padding-top: 16px;
 }
 
 .star-2 {

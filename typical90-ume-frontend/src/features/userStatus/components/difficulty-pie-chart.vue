@@ -78,7 +78,7 @@ const chartOptions = computed(() => {
             fontSize: '24px',
             show: true,
             formatter: (value: number) => {
-              return `${value.toFixed(1)}%`
+              return value === 100 ? '100%' : `${value.toFixed(1)}%`
             }
           }
         }
