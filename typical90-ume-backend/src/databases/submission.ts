@@ -43,11 +43,11 @@ export const readSubmissionsFromDb = async (userId: string) => {
         headers: { "Accept-Encoding": "gzip" },
       });
 
-      if (res.ok) {
+      if (res.status === 200) {
         const data = await res.json();
         for (const submission of data) {
-          if (data.contest_id === "typical90") {
-            submissions.push(submission);
+          if (submission.contest_id === "typical90") {
+            submissions.unshift(submission);
           }
         }
         if (data.length !== 500) {
